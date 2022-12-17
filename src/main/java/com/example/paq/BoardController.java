@@ -28,38 +28,38 @@ public class BoardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    // Créer un cercle
 
-        Image image = null;
+        Image image;
         try {
             image = chargeImage("cards/card-material-brick-women.png");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        Circle circle = new Circle((pane.getPrefWidth()-image.getWidth())/2, (pane.getPrefHeight()-image.getHeight())/2, 600);
+        Circle circle = new Circle((pane.getPrefWidth()-image.getWidth())/2, (pane.getPrefHeight()-image.getHeight())/2, 400);
         // définir le nombre d'images et leur distance
         int numImages = 7;
-        int distance = 360 / numImages;
         ArrayList <ImageView> imageViews = new ArrayList<>();
 
     // Placer les images équidistants autour du cercle
-        for (int i = 0; i < numImages; i++) {
+        for (int k = 0; k < numImages; k++) {
             ImageView imageView = new ImageView();
-            double angle = i * distance;
-            double x = circle.getCenterX() + (circle.getRadius() * Math.cos(angle));
-            double y = circle.getCenterY() + (circle.getRadius() * Math.sin(angle));
+
+            // racine nieme (exp(2*i*pi/n))
+
+            double x = circle.getCenterX() + (circle.getRadius() * Math.cos(2*Math.PI*k/numImages));
+            double y = circle.getCenterY() + (circle.getRadius() * Math.sin(2*Math.PI*k/numImages));
             // Placer l'image à l'angle calculé
             imageViews.add(imageView);
-            imageViews.get(i).setX(x);
-            imageViews.get(i).setY(y);
-            System.out.println("x = " + x);
-            System.out.println("y = " + y);
+            imageViews.get(k).setX(x);
+            imageViews.get(k).setY(y);
         }
-        for (ImageView imageview: imageViews){
+        for (int i = 0; i<imageViews.toArray().length;i++){
             try {
+                ImageView imageview = imageViews.get(i);
                 pane.getChildren().add(imageview);
                 imageview.setImage(chargeImage("cards/card-material-brick-women.png"));
+                imageview.setRotate((imageview.getRotate()-90) + 360*i/numImages);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
