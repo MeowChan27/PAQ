@@ -12,11 +12,11 @@
     </padding>
 
     <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" prefHeight="81.0" prefWidth="205.0" text="JOUER">
+    <Button onAction="#onPlayButtonClick" prefHeight="81.0" prefWidth="205.0" text="JOUER">
       <font>
          <Font name="Gabriola" size="43.0" />
       </font></Button>
-   <Button onAction="#onHelloButtonClick" prefHeight="81.0" prefWidth="205.0" text="QUITTER">
+   <Button onAction="#onPlayButtonClick" prefHeight="81.0" prefWidth="205.0" text="QUITTER">
       <font>
          <Font name="Gabriola" size="43.0" />
       </font>
