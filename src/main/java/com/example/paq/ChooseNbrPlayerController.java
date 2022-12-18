@@ -1,25 +1,31 @@
 package com.example.paq;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.stage.Stage;
+import com.example.paq.fr.isep.game7WonderArch.domain.Game;
 
 import java.io.IOException;
 import java.util.Objects;
 
-public class HelloController {
-
-    private Parent root;
+public class ChooseNbrPlayerController {
 
     @FXML
-    protected void onPlayButtonClick(ActionEvent event) {
+    Slider slider;
+    private Parent root;
+
+    public void chooseNbrPlayerBtn(ActionEvent event){
+        int nbrPlayer = (int) slider.getValue();
+        Game.setNbrPlayer(nbrPlayer);
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/paq/chooseNbrPlayer.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/paq/board-view.fxml")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -28,4 +34,5 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
     }
+
 }
