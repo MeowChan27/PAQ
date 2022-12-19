@@ -11,6 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -29,6 +31,13 @@ public class DescribePlayerController implements Initializable {
 
     private ArrayList<LocalDate> lstDatePlayer = new ArrayList<>();
     private ArrayList<DatePicker> lstDatePicker = new ArrayList<>();
+
+    private ArrayList<ImageView> lstImageWondersView = new ArrayList<>();
+
+    public static Image chargeImage(String url) throws Exception{
+        return new Image(Objects.requireNonNull(HelloApplication.class.getResource(url)).openStream());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // {Name1, Date1, Name2, Date2, ..., Name_nbrJoueur, Date_nbrJoueur}
@@ -44,6 +53,7 @@ public class DescribePlayerController implements Initializable {
             TextField textField = new TextField();
             DatePicker datePicker = new DatePicker();
             Button validerBtn = new Button("Valider");
+            ImageView wondersImageView = new ImageView();
             // On superpose au pane les afficheurs
             pane.getChildren().add(labelBirth);
             pane.getChildren().add(separator);
@@ -55,6 +65,8 @@ public class DescribePlayerController implements Initializable {
             validerBtn.setOnAction(this::validerBtn);
             pane.getChildren().add(datePicker);
             lstDatePicker.add(datePicker);
+            pane.getChildren().add(wondersImageView);
+            lstImageWondersView.add(wondersImageView);
             // ---
             // separator
             separator.setLayoutX(i*pane.getPrefWidth()/nbrJoueur);
@@ -87,6 +99,9 @@ public class DescribePlayerController implements Initializable {
             datePicker.setPrefWidth(120);
             datePicker.setLayoutX((i-1)*pane.getPrefWidth()/nbrJoueur+0.3*(pane.getPrefWidth()/nbrJoueur));
             datePicker.setLayoutY(pane.getPrefHeight()/2);
+            // ImageView
+            wondersImageView.setX((i-1)*pane.getPrefWidth()/nbrJoueur+0.2*(pane.getPrefWidth()/nbrJoueur));
+            wondersImageView.setY(50);
         }
     }
 
@@ -106,7 +121,7 @@ public class DescribePlayerController implements Initializable {
         }
         // on sauvegarde les données dans Game
         Game.setLstPlayerName(lstNamePlayer);
-        changeView(event);
+        Game.chooseRandomWonders();
     }
 
     public void changeView(ActionEvent event){

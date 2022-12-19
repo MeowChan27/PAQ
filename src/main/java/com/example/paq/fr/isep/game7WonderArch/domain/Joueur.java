@@ -26,7 +26,6 @@ public class Joueur {
     private List<CardDecks.CardTypeQuantity> deckCardQuantities;
     private int totalShield;
     private ArrayList<CardType> lstPlayerCard;
-    private final int[] dateOfBirth;
     private ArrayList<ProgressToken> lstPlayerProgressToken;
 
     // Constructeur
@@ -39,7 +38,6 @@ public class Joueur {
            List<CardDecks.CardTypeQuantity> deckCardQuantities,
            int totalShield,
            ArrayList<CardType> lstPlayerCard,
-           int[] dateOfBirth,
            ArrayList<ProgressToken> lstPlayerProgressToken){
 
         this.name = name;
@@ -50,7 +48,6 @@ public class Joueur {
         this.deckCardQuantities = deckCardQuantities;
         this.totalShield = totalShield;
         this.lstPlayerCard = lstPlayerCard;
-        this.dateOfBirth = dateOfBirth;
         this.lstPlayerProgressToken = lstPlayerProgressToken;
 
     }
@@ -127,10 +124,6 @@ public class Joueur {
 
     public void addLstPlayerCard(CardType cardType){
         lstPlayerCard.add(cardType);
-    }
-
-    public int[] getDateOfBirth(){
-        return dateOfBirth;
     }
 
     public ArrayList<ProgressToken> getLstPlayerProgressToken(){

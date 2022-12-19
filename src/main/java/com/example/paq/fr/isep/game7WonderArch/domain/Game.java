@@ -5,28 +5,33 @@ import com.example.paq.BoardController;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Game {
 
     // attributs
     private static int nbrPlayer;
 
-    private ArrayList <Joueur> lstJoueur;
+    private static ArrayList <Joueur> lstJoueur;
 
-    private ArrayList <Wonder> lstWondersPossibles = new ArrayList<>();
+    private static ArrayList <Wonder> lstWondersPossibles = new ArrayList<>();
 
     private static ArrayList<String> lstPlayerName;
     private static ArrayList<LocalDate> lstPlayerDate;
 
+    private static HashMap<Wonder, List<CardDecks.CardTypeQuantity>> hashMapWonderLstCardTypeQuantity;
+
+    private static ArrayList<CardType> lstCardType = new ArrayList<>();
+
+    private static ArrayList<ProgressToken> lstProgressToken = new ArrayList<>();
+
     // encapulsation
 
-    public ArrayList <Joueur> getLstJoueur(){
+    public static ArrayList <Joueur> getLstJoueur(){
         return lstJoueur;
     }
 
-    public void chooseCardLeftPacket(){
-        //
-    }
+
 
     public static int getNbrPlayer(){
         return nbrPlayer;
@@ -36,8 +41,26 @@ public class Game {
         Game.nbrPlayer = nbrPlayer;
     }
 
+    public static ArrayList<LocalDate> getLstPlayerDate() {return lstPlayerDate;}
+
+    public static void setLstPlayerDate(ArrayList<LocalDate> lstPlayerDate){Game.lstPlayerDate = lstPlayerDate;}
+
+    public static ArrayList<String> getLstPlayerName(){return lstPlayerName;}
+
+    public static void setLstPlayerName(ArrayList<String> lstPlayerName){Game.lstPlayerName = lstPlayerName;}
+
+    public static void fillLstWondersPossibles(){
+        lstWondersPossibles.add(Wonder.Alexandrie);
+        lstWondersPossibles.add(Wonder.Halicarnasse);
+        lstWondersPossibles.add(Wonder.Ephese);
+        lstWondersPossibles.add(Wonder.Olympie);
+        lstWondersPossibles.add(Wonder.Babylone);
+        lstWondersPossibles.add(Wonder.Rhodes);
+        lstWondersPossibles.add(Wonder.Gizeh);
+    }
+
     // pick wonder for each player
-    public void chooseRandomWonders(){
+    public static void chooseRandomWonders(){
         for (int i=0; i<nbrPlayer;i++){
             fillLstWondersPossibles();
             // entier aléatoire entre 0 inclus et (lstWondersPossibles.length-1) inclus
@@ -48,22 +71,27 @@ public class Game {
             lstWondersPossibles.remove(nbrRandom);
         }
     }
-    public void fillLstWondersPossibles(){
-        lstWondersPossibles.add(Wonder.Alexandrie);
-        lstWondersPossibles.add(Wonder.Halicarnasse);
-        lstWondersPossibles.add(Wonder.Ephese);
-        lstWondersPossibles.add(Wonder.Olympie);
-        lstWondersPossibles.add(Wonder.Babylone);
-        lstWondersPossibles.add(Wonder.Rhodes);
-        lstWondersPossibles.add(Wonder.Gizeh);
+
+    // init Player
+    public static void initPlayer(String name, Wonder wonder){
+        for (int i = 0; i<nbrPlayer; i++){
+            lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, hashMapWonderLstCardTypeQuantity.get(wonder), 0, lstCardType,lstProgressToken));
+        }
     }
 
-    public static ArrayList<LocalDate> getLstPlayerDate() {return lstPlayerDate;}
+    // HashMap entre les wonders et les LstCardType associées à ces wonders
+    public static void hashMapWonderLstCardTypeQuantity(){
+        hashMapWonderLstCardTypeQuantity.put(Wonder.Alexandrie,CardDecks.deckCardQuantities_Alexandrie);
+        hashMapWonderLstCardTypeQuantity.put(Wonder.Gizeh,CardDecks.deckCardQuantities_Gizeh);
+        hashMapWonderLstCardTypeQuantity.put(Wonder.Ephese,CardDecks.deckCardQuantities_Ephese);
+        hashMapWonderLstCardTypeQuantity.put(Wonder.Olympie,CardDecks.deckCardQuantities_Olympie);
+        hashMapWonderLstCardTypeQuantity.put(Wonder.Babylone,CardDecks.deckCardQuantities_Babylon);
+        hashMapWonderLstCardTypeQuantity.put(Wonder.Rhodes,CardDecks.deckCardQuantities_Rhodes);
+        hashMapWonderLstCardTypeQuantity.put(Wonder.Halicarnasse,CardDecks.deckCardQuantities_Halicarnasse);
+    }
 
-    public static void setLstPlayerDate(ArrayList<LocalDate> lstPlayerDate){Game.lstPlayerDate = lstPlayerDate;}
-
-    public static ArrayList<String> getLstPlayerName(){return lstPlayerName;}
-
-    public static void setLstPlayerName(ArrayList<String> lstPlayerName){Game.lstPlayerName = lstPlayerName;}
+    public static void  chooseCardLeftPacket(){
+        //
+    }
 
 }
