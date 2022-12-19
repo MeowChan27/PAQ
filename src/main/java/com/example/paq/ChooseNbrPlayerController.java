@@ -25,7 +25,7 @@ public class ChooseNbrPlayerController {
         int nbrPlayer = (int) slider.getValue();
         Game.setNbrPlayer(nbrPlayer);
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/paq/board-view.fxml")));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/paq/describePlayer.fxml")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

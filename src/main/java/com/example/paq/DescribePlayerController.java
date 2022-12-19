@@ -4,11 +4,17 @@ import com.example.paq.fr.isep.game7WonderArch.domain.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
@@ -26,7 +32,7 @@ public class DescribePlayerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // {Name1, Date1, Name2, Date2, ..., Name_nbrJoueur, Date_nbrJoueur}
-        int nbrJoueur = 7;
+        int nbrJoueur = Game.getNbrPlayer();
         // valeur arbitraire pour limiter les séparateurs verticalement
         double heightSeparator = 0.8;
         for (int i = 1; i<=nbrJoueur; i++){
@@ -46,7 +52,7 @@ public class DescribePlayerController implements Initializable {
             pane.getChildren().add(textField);
             lstTextField.add(textField);
             pane.getChildren().add(validerBtn);
-            validerBtn.setOnAction(event -> validerBtn());
+            validerBtn.setOnAction(this::validerBtn);
             pane.getChildren().add(datePicker);
             lstDatePicker.add(datePicker);
             // ---
@@ -84,7 +90,7 @@ public class DescribePlayerController implements Initializable {
         }
     }
 
-    public void validerBtn(){
+    public void validerBtn(ActionEvent event){
         HashMap<LocalDate,String> hashMapDatePlayerName = new HashMap<>();
         for (int i = 0; i<lstTextField.toArray().length;i++){
             hashMapDatePlayerName.put(lstDatePicker.get(i).getValue(), lstTextField.get(i).getText());
@@ -100,5 +106,19 @@ public class DescribePlayerController implements Initializable {
         }
         // on sauvegarde les données dans Game
         Game.setLstPlayerName(lstNamePlayer);
+        changeView(event);
+    }
+
+    public void changeView(ActionEvent event){
+        Parent root;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/paq/board-view.fxml")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
