@@ -38,8 +38,6 @@ public class  BoardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Circle circle = new Circle((pane.getPrefWidth()/2)-widthWonderImageView, (pane.getPrefHeight()/2)-heightWonderImageView, 350);
-        System.out.println((pane.getPrefWidth())/2-widthWonderImageView);
-        System.out.println((pane.getPrefHeight()/2)-heightWonderImageView);
         // définir le nombre d'images et leur distance
 
         ArrayList <ImageView> imageViews = new ArrayList<>();
@@ -76,7 +74,7 @@ public class  BoardController implements Initializable {
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
-        Circle circle = new Circle((pane.getPrefWidth())/2-widthWonderCardView, (pane.getPrefHeight()/2)-heightWonderCardView, 350+heightWonderImageView);
+        Circle circle = new Circle((pane.getPrefWidth())/2-widthWonderCardView, (pane.getPrefHeight()/2)-heightWonderCardView, 350+heightWonderImageView/2);
             double x = circle.getCenterX() + (circle.getRadius() * Math.cos(2*Math.PI*tourDuJoueur/numImages));
             double y = circle.getCenterY() + (circle.getRadius() * Math.sin(2*Math.PI*tourDuJoueur/numImages));
             imageView.setX(x);
