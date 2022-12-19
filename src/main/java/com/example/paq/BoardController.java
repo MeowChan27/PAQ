@@ -1,6 +1,7 @@
 package com.example.paq;
 
 import com.example.paq.fr.isep.game7WonderArch.domain.Game;
+import com.example.paq.fr.isep.game7WonderArch.domain.Joueur;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -21,8 +23,12 @@ public class  BoardController implements Initializable {
 
     @FXML
     Pane pane;
-    private int numImages = Game.getNbrPlayer();
 
+    private final int widthWonderImageView = 200/2;
+    private final int heightWonderImageView = 292/2;
+    private final int numImages = Game.getNbrPlayer();
+
+    HashMap<Integer, Joueur> hashMapTourDeJeuPlayer = new HashMap<>();
 
     public static Image chargeImage(String url) throws Exception{
         return new Image(Objects.requireNonNull(HelloApplication.class.getResource(url)).openStream());
@@ -31,8 +37,6 @@ public class  BoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        int widthWonderImageView = 200/2;
-        int heightWonderImageView = 292/2;
         Circle circle = new Circle((pane.getPrefWidth()/2)-widthWonderImageView, (pane.getPrefHeight()/2)-heightWonderImageView, 350);
         System.out.println((pane.getPrefWidth())/2-widthWonderImageView);
         System.out.println((pane.getPrefHeight()/2)-heightWonderImageView);
@@ -70,23 +74,23 @@ public class  BoardController implements Initializable {
     private int tourDuJoueur = 1;
     public void piocher(){
         ImageView imageView = new ImageView();
-        int widthWonderImageView = 200/3;
-        int heightWonderImageView = 292/3;
-        Circle circle = new Circle((pane.getPrefWidth())/2-widthWonderImageView, (pane.getPrefHeight()/2)-heightWonderImageView, 440);
-        if (tourDuJoueur == 1){
+        int widthWonderCardView = 200/3;
+        int heightWonderCardView = 292/3;
+        Circle circle = new Circle((pane.getPrefWidth())/2-widthWonderCardView, (pane.getPrefHeight()/2)-heightWonderCardView, 350+heightWonderImageView);
             double x = circle.getCenterX() + (circle.getRadius() * Math.cos(2*Math.PI*tourDuJoueur/numImages));
             double y = circle.getCenterY() + (circle.getRadius() * Math.sin(2*Math.PI*tourDuJoueur/numImages));
             imageView.setX(x);
             imageView.setY(y);
             imageView.setRotate((imageView.getRotate()-90) + 360*tourDuJoueur/numImages);
-            imageView.setFitWidth(widthWonderImageView);
-            imageView.setFitHeight(heightWonderImageView);
+            imageView.setFitWidth(widthWonderCardView);
+            imageView.setFitHeight(heightWonderCardView);
             pane.getChildren().add(imageView);
             try {
                 imageView.setImage(chargeImage("cards/card-progress-architect.png"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            tourDuJoueur += 1;
         }
     }
-}
+

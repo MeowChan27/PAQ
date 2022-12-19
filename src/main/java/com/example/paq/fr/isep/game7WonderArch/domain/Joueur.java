@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Joueur {
 
-    /* Un joueur a une merveille
+    /* Un nom
+     Un joueur a une merveille
     Il a entier correspond aux nombres de morceaux de merveilles qu'il a construit
     Il a un certain nombre de jeton militaire
     Il a un nombre de points
@@ -16,6 +17,7 @@ public class Joueur {
     Date de naissance {JJ,MM,AA}
     * */
 
+    private final String name;
     private Wonder wonder;
     private int pieceWonderBuild;
     private int points;
@@ -28,7 +30,8 @@ public class Joueur {
     private ArrayList<ProgressToken> lstPlayerProgressToken;
 
     // Constructeur
-    Joueur(Wonder wonder,
+    Joueur(String name,
+           Wonder wonder,
            int pieceWonderBuild,
            int points,
            int nbrJetonMilitaire,
@@ -39,6 +42,7 @@ public class Joueur {
            int[] dateOfBirth,
            ArrayList<ProgressToken> lstPlayerProgressToken){
 
+        this.name = name;
         this.pieceWonderBuild = pieceWonderBuild;
         this.points = points;
         this.nbrJetonMilitaire = nbrJetonMilitaire;
@@ -52,6 +56,10 @@ public class Joueur {
     }
 
     // Encapsulation
+
+    public String getName(){
+        return name;
+    }
 
     public Wonder getWonder(){
         return wonder;
