@@ -36,7 +36,7 @@ public class DescribePlayerController implements Initializable {
 
     private Button BtnCommencerLaPartie = new Button("Commencez la partie ! ");
 
-    private Button validerBtn = new Button("Valider");
+    private Button validerBtn = new Button("Valider");;
 
     public static Image chargeImage(String url) throws Exception{
         return new Image(Objects.requireNonNull(HelloApplication.class.getResource(url)).openStream());
@@ -64,13 +64,10 @@ public class DescribePlayerController implements Initializable {
             pane.getChildren().add(labelNamePlayer);
             pane.getChildren().add(textField);
             lstTextField.add(textField);
-            pane.getChildren().add(validerBtn);
-            validerBtn.setOnAction(this::validerBtn);
             pane.getChildren().add(datePicker);
             lstDatePicker.add(datePicker);
             pane.getChildren().add(wondersImageView);
             lstImageWondersView.add(wondersImageView);
-            BtnCommencerLaPartie.setOnAction(this::changeView);
             // ---
             // separator
             separator.setLayoutX(i*pane.getPrefWidth()/nbrJoueur);
@@ -95,10 +92,7 @@ public class DescribePlayerController implements Initializable {
             textField.setPrefWidth(120);
             textField.setLayoutX((i-1)*pane.getPrefWidth()/nbrJoueur+0.3*(pane.getPrefWidth()/nbrJoueur));
             textField.setLayoutY(heightSeparator*pane.getPrefHeight()/2);
-            // Btn Valider (on aura pu le définir sur scène builder également)
-            validerBtn.setPrefWidth(100);
-            validerBtn.setLayoutX(pane.getPrefWidth()/2 - validerBtn.getPrefWidth());
-            validerBtn.setLayoutY(heightSeparator*pane.getPrefHeight()+(pane.getPrefHeight()-heightSeparator*pane.getPrefHeight())/2 - validerBtn.getPrefHeight());
+
             // Date Picker
             datePicker.setPrefWidth(120);
             datePicker.setLayoutX((i-1)*pane.getPrefWidth()/nbrJoueur+0.3*(pane.getPrefWidth()/nbrJoueur));
@@ -107,13 +101,21 @@ public class DescribePlayerController implements Initializable {
             wondersImageView.setX(pane.getPrefWidth()/Game.getNbrPlayer());
             wondersImageView.setY(100);
             wondersImageView.setLayoutX((i-1)*pane.getPrefWidth()/Game.getNbrPlayer()+0.15*(pane.getPrefWidth()/Game.getNbrPlayer())-wondersImageView.getX());
-            // Btn Commencer la partie
-            BtnCommencerLaPartie.setPrefHeight(20);
-            BtnCommencerLaPartie.setPrefWidth(200);
-            BtnCommencerLaPartie.setLayoutX(pane.getPrefWidth()/2 - validerBtn.getPrefWidth());
-            BtnCommencerLaPartie.setLayoutY(heightSeparator*pane.getPrefHeight()+(pane.getPrefHeight()-heightSeparator*pane.getPrefHeight())/2);
+
 
         }
+        pane.getChildren().add(validerBtn);
+        validerBtn.setOnAction(this::validerBtn);
+        BtnCommencerLaPartie.setOnAction(this::changeView);
+        // Btn Valider (on aura pu le définir sur scène builder également)
+        validerBtn.setPrefWidth(100);
+        validerBtn.setLayoutX(pane.getPrefWidth()/2 - validerBtn.getPrefWidth());
+        validerBtn.setLayoutY(heightSeparator*pane.getPrefHeight()+(pane.getPrefHeight()-heightSeparator*pane.getPrefHeight())/2 - validerBtn.getPrefHeight());
+        // Btn Commencer la partie
+        BtnCommencerLaPartie.setPrefHeight(20);
+        BtnCommencerLaPartie.setPrefWidth(200);
+        BtnCommencerLaPartie.setLayoutX(pane.getPrefWidth()/2 - validerBtn.getPrefWidth());
+        BtnCommencerLaPartie.setLayoutY(heightSeparator*pane.getPrefHeight()+(pane.getPrefHeight()-heightSeparator*pane.getPrefHeight())/2);
     }
 
     public void validerBtn(ActionEvent event){
