@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static javafx.scene.paint.Color.DODGERBLUE;
+
 public class  BoardController implements Initializable {
 
     @FXML
@@ -37,7 +39,10 @@ public class  BoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Circle circle = new Circle((pane.getPrefWidth()/2)-widthWonderImageView, (pane.getPrefHeight()/2)-heightWonderImageView, 350);
+        Circle circle = new Circle((pane.getPrefWidth()/2), (pane.getPrefHeight()/2), 350);
+        circle.setFill(DODGERBLUE);
+        circle.setOpacity(0.6);
+        pane.getChildren().add(circle);
         // définir le nombre d'images et leur distance
 
         ArrayList <ImageView> imageViews = new ArrayList<>();
@@ -52,8 +57,8 @@ public class  BoardController implements Initializable {
             double y = circle.getCenterY() + (circle.getRadius() * Math.sin(2*Math.PI*k/numImages));
             // Placer l'image à l'angle calculé
             imageViews.add(imageView);
-            imageViews.get(k).setX(x);
-            imageViews.get(k).setY(y);
+            imageViews.get(k).setX(x-widthWonderImageView/2);
+            imageViews.get(k).setY(y-heightWonderImageView/2);
         }
         for (int i = 0; i<imageViews.toArray().length;i++){
             try {
@@ -61,7 +66,7 @@ public class  BoardController implements Initializable {
                 pane.getChildren().add(imageview);
                 imageview.setImage(chargeImage("cards/card-material-brick-women.png"));
                 // on met les cartes vers l'ext
-                imageview.setRotate((imageview.getRotate()-90) + 360*i/numImages);
+                // mageview.setRotate((imageview.getRotate()-90) + 360*i/numImages);
                 imageview.setFitWidth(widthWonderImageView);
                 imageview.setFitHeight(heightWonderImageView);
             } catch (Exception e) {
@@ -74,12 +79,12 @@ public class  BoardController implements Initializable {
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
-        Circle circle = new Circle((pane.getPrefWidth())/2-widthWonderCardView, (pane.getPrefHeight()/2)-heightWonderCardView, 350+heightWonderImageView/2);
+        Circle circle = new Circle((pane.getPrefWidth())/2, (pane.getPrefHeight()/2), 350+heightWonderImageView/2);
             double x = circle.getCenterX() + (circle.getRadius() * Math.cos(2*Math.PI*tourDuJoueur/numImages));
             double y = circle.getCenterY() + (circle.getRadius() * Math.sin(2*Math.PI*tourDuJoueur/numImages));
             imageView.setX(x);
             imageView.setY(y);
-            imageView.setRotate((imageView.getRotate()-90) + 360*tourDuJoueur/numImages);
+            // imageView.setRotate((imageView.getRotate()-90) + 360*tourDuJoueur/numImages);
             imageView.setFitWidth(widthWonderCardView);
             imageView.setFitHeight(heightWonderCardView);
             pane.getChildren().add(imageView);
