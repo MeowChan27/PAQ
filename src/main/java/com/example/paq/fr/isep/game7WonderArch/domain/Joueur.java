@@ -41,6 +41,7 @@ public class Joueur {
            ArrayList<ProgressToken> lstPlayerProgressToken){
 
         this.name = name;
+        this.wonder = wonder;
         this.pieceWonderBuild = pieceWonderBuild;
         this.points = points;
         this.nbrJetonMilitaire = nbrJetonMilitaire;

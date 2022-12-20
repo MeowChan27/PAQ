@@ -34,6 +34,10 @@ public class DescribePlayerController implements Initializable {
 
     private ArrayList<ImageView> lstImageWondersView = new ArrayList<>();
 
+    private Button BtnCommencerLaPartie = new Button("Commencez la partie ! ");
+
+    private Button validerBtn = new Button("Valider");
+
     public static Image chargeImage(String url) throws Exception{
         return new Image(Objects.requireNonNull(HelloApplication.class.getResource(url)).openStream());
     }
@@ -52,7 +56,6 @@ public class DescribePlayerController implements Initializable {
             Label labelBirth = new Label();
             TextField textField = new TextField();
             DatePicker datePicker = new DatePicker();
-            Button validerBtn = new Button("Valider");
             ImageView wondersImageView = new ImageView();
             // On superpose au pane les afficheurs
             pane.getChildren().add(labelBirth);
@@ -67,6 +70,7 @@ public class DescribePlayerController implements Initializable {
             lstDatePicker.add(datePicker);
             pane.getChildren().add(wondersImageView);
             lstImageWondersView.add(wondersImageView);
+            BtnCommencerLaPartie.setOnAction(this::changeView);
             // ---
             // separator
             separator.setLayoutX(i*pane.getPrefWidth()/nbrJoueur);
@@ -100,14 +104,35 @@ public class DescribePlayerController implements Initializable {
             datePicker.setLayoutX((i-1)*pane.getPrefWidth()/nbrJoueur+0.3*(pane.getPrefWidth()/nbrJoueur));
             datePicker.setLayoutY(pane.getPrefHeight()/2);
             // ImageView
-            wondersImageView.setX((i-1)*pane.getPrefWidth()/nbrJoueur+0.2*(pane.getPrefWidth()/nbrJoueur));
-            wondersImageView.setY(50);
+            wondersImageView.setX(pane.getPrefWidth()/Game.getNbrPlayer());
+            wondersImageView.setY(100);
+            wondersImageView.setLayoutX((i-1)*pane.getPrefWidth()/Game.getNbrPlayer()+0.15*(pane.getPrefWidth()/Game.getNbrPlayer())-wondersImageView.getX());
+            // Btn Commencer la partie
+            BtnCommencerLaPartie.setPrefHeight(20);
+            BtnCommencerLaPartie.setPrefWidth(200);
+            BtnCommencerLaPartie.setLayoutX(pane.getPrefWidth()/2 - validerBtn.getPrefWidth());
+            BtnCommencerLaPartie.setLayoutY(heightSeparator*pane.getPrefHeight()+(pane.getPrefHeight()-heightSeparator*pane.getPrefHeight())/2);
+
         }
     }
 
     public void validerBtn(ActionEvent event){
         HashMap<LocalDate,String> hashMapDatePlayerName = new HashMap<>();
         for (int i = 0; i<lstTextField.toArray().length;i++){
+            // On stocke la liste des joueurs tel que donnée dans la vue describePlayerController
+            lstNamePlayer.add(lstTextField.get(i).getText());
+            Game.setLstPlayerName(lstNamePlayer);
+        }
+        // chaque joueur est crée avec un wonder diff
+        Game.chooseRandomWonders();
+
+        for (int i = 0; i<lstTextField.toArray().length;i++){
+            try {
+                lstImageWondersView.get(i).setImage(chargeImage(Game.getLstJoueur().get(i).getWonder().imagePath));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            // hashMap entre les Date et les Joueurs
             hashMapDatePlayerName.put(lstDatePicker.get(i).getValue(), lstTextField.get(i).getText());
             lstDatePlayer.add(lstDatePicker.get(i).getValue());
         }
@@ -119,9 +144,11 @@ public class DescribePlayerController implements Initializable {
         for (int i = 0; i<lstDatePlayer.toArray().length;i++){
             lstNamePlayer.add(hashMapDatePlayerName.get(lstDatePlayer.get(i)));
         }
-        // on sauvegarde les données dans Game
+        // on remplace lstNamePlayer par la liste triée
         Game.setLstPlayerName(lstNamePlayer);
-        Game.chooseRandomWonders();
+        validerBtn.setVisible(false);
+        validerBtn.setDisable(true);
+        pane.getChildren().add(BtnCommencerLaPartie);
     }
 
     public void changeView(ActionEvent event){

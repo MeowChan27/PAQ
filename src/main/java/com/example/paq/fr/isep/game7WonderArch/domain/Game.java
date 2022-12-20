@@ -1,6 +1,8 @@
 package com.example.paq.fr.isep.game7WonderArch.domain;
 
 import com.example.paq.BoardController;
+import com.example.paq.DescribePlayerController;
+import javafx.scene.image.Image;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,26 +14,25 @@ public class Game {
     // attributs
     private static int nbrPlayer;
 
-    private static ArrayList <Joueur> lstJoueur;
+    private static ArrayList <Joueur> lstJoueur = new ArrayList<>();
 
     private static ArrayList <Wonder> lstWondersPossibles = new ArrayList<>();
 
-    private static ArrayList<String> lstPlayerName;
-    private static ArrayList<LocalDate> lstPlayerDate;
+    private static ArrayList<String> lstPlayerName = new ArrayList<>();
+    private static ArrayList<LocalDate> lstPlayerDate = new ArrayList<>();
 
-    private static HashMap<Wonder, List<CardDecks.CardTypeQuantity>> hashMapWonderLstCardTypeQuantity;
+    // private static HashMap<Wonder, List<CardDecks.CardTypeQuantity>> hashMapWonderLstCardTypeQuantity;
 
     private static ArrayList<CardType> lstCardType = new ArrayList<>();
 
     private static ArrayList<ProgressToken> lstProgressToken = new ArrayList<>();
+
 
     // encapulsation
 
     public static ArrayList <Joueur> getLstJoueur(){
         return lstJoueur;
     }
-
-
 
     public static int getNbrPlayer(){
         return nbrPlayer;
@@ -61,12 +62,13 @@ public class Game {
 
     // pick wonder for each player
     public static void chooseRandomWonders(){
+        fillLstWondersPossibles();
         for (int i=0; i<nbrPlayer;i++){
-            fillLstWondersPossibles();
             // entier aléatoire entre 0 inclus et (lstWondersPossibles.length-1) inclus
             int nbrRandom = (int)(Math.random()*lstWondersPossibles.toArray().length);
             Wonder wonderPlayer = lstWondersPossibles.get(nbrRandom);
             // New Joueur
+            initPlayer(lstPlayerName.get(i),wonderPlayer);
             // On retire la merveille choisie
             lstWondersPossibles.remove(nbrRandom);
         }
@@ -74,12 +76,11 @@ public class Game {
 
     // init Player
     public static void initPlayer(String name, Wonder wonder){
-        for (int i = 0; i<nbrPlayer; i++){
-            lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, hashMapWonderLstCardTypeQuantity.get(wonder), 0, lstCardType,lstProgressToken));
-        }
+        lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, wonder.lstcardDecks, 0, lstCardType,lstProgressToken));
     }
 
     // HashMap entre les wonders et les LstCardType associées à ces wonders
+    /*
     public static void hashMapWonderLstCardTypeQuantity(){
         hashMapWonderLstCardTypeQuantity.put(Wonder.Alexandrie,CardDecks.deckCardQuantities_Alexandrie);
         hashMapWonderLstCardTypeQuantity.put(Wonder.Gizeh,CardDecks.deckCardQuantities_Gizeh);
@@ -89,6 +90,7 @@ public class Game {
         hashMapWonderLstCardTypeQuantity.put(Wonder.Rhodes,CardDecks.deckCardQuantities_Rhodes);
         hashMapWonderLstCardTypeQuantity.put(Wonder.Halicarnasse,CardDecks.deckCardQuantities_Halicarnasse);
     }
+    */
 
     public static void  chooseCardLeftPacket(){
         //
