@@ -2,11 +2,13 @@ package com.example.paq;
 
 import com.example.paq.fr.isep.game7WonderArch.domain.Game;
 import com.example.paq.fr.isep.game7WonderArch.domain.Joueur;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -26,6 +28,8 @@ public class  BoardController implements Initializable {
     @FXML
     Pane pane;
 
+    private Button btnPiocher = new Button("Piocher");
+
     private final int widthWonderImageView = 200/2;
     private final int heightWonderImageView = 292/2;
     private final int numImages = Game.getNbrPlayer();
@@ -39,10 +43,20 @@ public class  BoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // Circle
         Circle circle = new Circle((pane.getPrefWidth()/2), (pane.getPrefHeight()/2), 350);
         circle.setFill(DODGERBLUE);
         circle.setOpacity(0.6);
         pane.getChildren().add(circle);
+
+        // Button
+        pane.getChildren().add(btnPiocher);
+        btnPiocher.setPrefWidth(150);
+        btnPiocher.setPrefHeight(5);
+        btnPiocher.setLayoutX((pane.getPrefWidth()-btnPiocher.getPrefWidth())/2);
+        btnPiocher.setLayoutY((pane.getPrefHeight()-btnPiocher.getPrefHeight())/2);
+        btnPiocher.setOnAction(this::piocher);
+
         // définir le nombre d'images et leur distance
 
         ArrayList <ImageView> imageViews = new ArrayList<>();
@@ -75,7 +89,7 @@ public class  BoardController implements Initializable {
         }
     }
     private int tourDuJoueur = 1;
-    public void piocher(){
+    public void piocher(ActionEvent event){
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;

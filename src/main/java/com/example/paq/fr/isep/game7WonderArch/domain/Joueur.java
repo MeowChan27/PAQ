@@ -50,7 +50,6 @@ public class Joueur {
         this.totalShield = totalShield;
         this.lstPlayerCard = lstPlayerCard;
         this.lstPlayerProgressToken = lstPlayerProgressToken;
-
     }
 
     // Encapsulation

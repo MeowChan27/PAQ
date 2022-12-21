@@ -11,7 +11,7 @@ public enum CardType {
 	CardMaterialBrick("material:brick", Material.Brick, "card-material-brick-women.png"), //
 	CardMaterialStone("material:stone", Material.Stone, "card-material-stone-stonecutter.png"), //
 	CardMaterialGlass("material:glass", Material.Glass, "card-material-glass-women.png"), //
-	// joker (mandatory replacing any material) 
+	// joker (mandatory replacing any material)
 	CardMaterialGold("material:gold", Material.Gold, "card-material-gold-vizir.png"), //
 	
 	// Science cards
