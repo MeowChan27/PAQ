@@ -64,11 +64,9 @@ public class  BoardController implements Initializable {
     // Placer les images équidistants autour du cercle
         for (int k = 0; k < numImages; k++) {
             ImageView imageView = new ImageView();
-
-            // racine nieme (exp(2*i*pi/n))
-
-            double x = circle.getCenterX() + (circle.getRadius() * Math.cos(2*Math.PI*k/numImages));
-            double y = circle.getCenterY() + (circle.getRadius() * Math.sin(2*Math.PI*k/numImages));
+            // racine nieme (exp(2*i*pi/n)) avec une rotation de 3pi/2
+            double x = circle.getCenterX() + (circle.getRadius() * Math.cos((3*Math.PI/2*numImages)+2*Math.PI*k/numImages));
+            double y = circle.getCenterY() + (circle.getRadius() * Math.sin((3*Math.PI/2*numImages)+2*Math.PI*k/numImages));
             // Placer l'image à l'angle calculé
             imageViews.add(imageView);
             imageViews.get(k).setX(x-widthWonderImageView/2);
@@ -94,8 +92,8 @@ public class  BoardController implements Initializable {
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
         Circle circle = new Circle((pane.getPrefWidth())/2, (pane.getPrefHeight()/2), 350+heightWonderImageView/2);
-            double x = circle.getCenterX() + (circle.getRadius() * Math.cos(2*Math.PI*tourDuJoueur/numImages));
-            double y = circle.getCenterY() + (circle.getRadius() * Math.sin(2*Math.PI*tourDuJoueur/numImages));
+            double x = circle.getCenterX() + (circle.getRadius() * Math.cos((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
+            double y = circle.getCenterY() + (circle.getRadius() * Math.sin((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
             imageView.setX(x);
             imageView.setY(y);
             // imageView.setRotate((imageView.getRotate()-90) + 360*tourDuJoueur/numImages);
