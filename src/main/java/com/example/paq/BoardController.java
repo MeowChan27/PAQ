@@ -28,8 +28,8 @@ public class  BoardController implements Initializable {
 
     private final Button btnPiocher = new Button("Piocher");
 
-    private final int widthWonderImageView = 200/2;
-    private final int heightWonderImageView = 292/2;
+    private final int widthWonderImageView = 80;
+    private final int heightWonderImageView = 274;
     private final int numImages = Game.getNbrPlayer();
 
     private final ArrayList<Joueur> lstJoueur = Game.getLstJoueur();
@@ -75,7 +75,7 @@ public class  BoardController implements Initializable {
             try {
                 ImageView imageview = imageViews.get(k);
                 pane.getChildren().add(imageview);
-                imageview.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathBack));
+                imageview.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathFront));
                 // on met les cartes vers l'ext
                 // mageview.setRotate((imageview.getRotate()-90) + 360*i/numImages);
                 imageview.setFitWidth(widthWonderImageView);
@@ -94,10 +94,10 @@ public class  BoardController implements Initializable {
             double ysuivant = circle.getCenterY() + (circle.getRadius() * Math.sin((3 * Math.PI / 2 * numImages) + 2 * Math.PI * (k+1) / numImages));
             double xpioche = (x + xsuivant)/2;
             double ypioche = (y + ysuivant)/2;
-            imageViewPioche.setFitWidth((widthWonderImageView/2));
-            imageViewPioche.setFitHeight(heightWonderImageView/2);
-            imageViewPioche.setX(xpioche-widthWonderImageView/4);
-            imageViewPioche.setY(ypioche-heightWonderImageView/4);
+            imageViewPioche.setFitWidth((50));
+            imageViewPioche.setFitHeight(73);
+            imageViewPioche.setX(xpioche-25);
+            imageViewPioche.setY(ypioche-36);
             try {
                 pane.getChildren().add(imageViewPioche);
                 imageViewPioche.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathBack));
