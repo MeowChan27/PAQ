@@ -1,7 +1,7 @@
 package com.example.paq.fr.isep.game7WonderArch.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class CardDecks {
 
@@ -15,8 +15,8 @@ public class CardDecks {
 	}
 	
 	/** Card Types x Quantities for Gizeh Deck */
-	public static final List<CardTypeQuantity> deckCardQuantities_Gizeh = Arrays.asList(
-			// List of CartTypeQuantity
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Gizeh = new ArrayList<>(Arrays.asList(
+			// List of CardTypeQuantity
 			// material
 			new CardTypeQuantity(2, CardType.CardMaterialWood), //
 			new CardTypeQuantity(2, CardType.CardMaterialPaper), //
@@ -35,10 +35,10 @@ public class CardDecks {
 			// politics
 			new CardTypeQuantity(2, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(3, CardType.CardPolitic_cat) //
-	);
+	));
 
 	/** Card Types x Quantities for Rhodes Deck */
-	public static final List<CardTypeQuantity> deckCardQuantities_Rhodes = Arrays.asList(// material
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Rhodes = new ArrayList<>(Arrays.asList(// material
 			new CardTypeQuantity(2, CardType.CardMaterialWood), //
 			new CardTypeQuantity(2, CardType.CardMaterialPaper), //
 			new CardTypeQuantity(2, CardType.CardMaterialBrick), //
@@ -56,10 +56,10 @@ public class CardDecks {
 			// politics
 			new CardTypeQuantity(2, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(2, CardType.CardPolitic_cat) //
-	);
+	));
 
 	/** Card Types x Quantities for Babylon Deck */
-	public static final List<CardTypeQuantity> deckCardQuantities_Babylon = Arrays.asList(// material
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Babylon = new ArrayList<>(Arrays.asList(// material
 			new CardTypeQuantity(2, CardType.CardMaterialWood), //
 			new CardTypeQuantity(2, CardType.CardMaterialPaper), //
 			new CardTypeQuantity(2-1, CardType.CardMaterialBrick), // 2-1
@@ -77,10 +77,10 @@ public class CardDecks {
 			// politics
 			new CardTypeQuantity(2, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(2, CardType.CardPolitic_cat) //
-	);
+	));
 	
 	/** Card Types x Quantities for Halicarnasse Deck */
-	public static final List<CardTypeQuantity> deckCardQuantities_Halicarnasse = Arrays.asList(// material
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Halicarnasse = new ArrayList<>(Arrays.asList(// material
 			new CardTypeQuantity(2, CardType.CardMaterialWood), //
 			new CardTypeQuantity(1, CardType.CardMaterialPaper), // 2-1
 			new CardTypeQuantity(2, CardType.CardMaterialBrick), //
@@ -98,10 +98,10 @@ public class CardDecks {
 			// politics
 			new CardTypeQuantity(2, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(2, CardType.CardPolitic_cat) //
-	);
+	));
 
 	/** Card Types x Quantities for Alexandrie Deck */
-	public static final List<CardTypeQuantity> deckCardQuantities_Alexandrie = Arrays.asList(// material
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Alexandrie = new ArrayList<>(Arrays.asList(// material
 			new CardTypeQuantity(2, CardType.CardMaterialWood), //
 			new CardTypeQuantity(2, CardType.CardMaterialPaper), //
 			new CardTypeQuantity(2, CardType.CardMaterialBrick), //
@@ -119,10 +119,10 @@ public class CardDecks {
 			// politics
 			new CardTypeQuantity(2, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(2, CardType.CardPolitic_cat) //
-	);
+	));
 
 	/** Card Types x Quantities for Ephese Deck */
-	public static final List<CardTypeQuantity> deckCardQuantities_Ephese = Arrays.asList(// material
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Ephese = new ArrayList<>(Arrays.asList(// material
 			new CardTypeQuantity(2, CardType.CardMaterialWood), //
 			new CardTypeQuantity(2, CardType.CardMaterialPaper), //
 			new CardTypeQuantity(2, CardType.CardMaterialBrick), //
@@ -140,10 +140,10 @@ public class CardDecks {
 			// politics
 			new CardTypeQuantity(1, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(2, CardType.CardPolitic_cat) //
-	);
+	));
 
 	/** Card Types x Quantities for Olympie Deck */
-	public static final List<CardTypeQuantity> deckCardQuantities_Olympie = Arrays.asList(// material
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Olympie = new ArrayList<>(Arrays.asList(// material
 			new CardTypeQuantity(1, CardType.CardMaterialWood), // 2-1
 			new CardTypeQuantity(2, CardType.CardMaterialPaper), //
 			new CardTypeQuantity(2, CardType.CardMaterialBrick), //
@@ -161,10 +161,10 @@ public class CardDecks {
 			// politics
 			new CardTypeQuantity(1, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(3, CardType.CardPolitic_cat) //
-	);
+	));
 
 	/** Card Types x Quantities for extra Question Deck */
-	public static final List<CardTypeQuantity> deckCardQuantities_Extra = Arrays.asList(// material
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Extra = new ArrayList<>(Arrays.asList(// material
 			new CardTypeQuantity(4, CardType.CardMaterialWood), //
 			new CardTypeQuantity(4, CardType.CardMaterialPaper), //
 			new CardTypeQuantity(4, CardType.CardMaterialBrick), //
@@ -182,5 +182,5 @@ public class CardDecks {
 			// politics
 			new CardTypeQuantity(4, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(8, CardType.CardPolitic_cat) //
-	);
+	));
 }

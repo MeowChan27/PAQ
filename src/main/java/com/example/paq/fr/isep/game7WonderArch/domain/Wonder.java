@@ -3,6 +3,7 @@ package com.example.paq.fr.isep.game7WonderArch.domain;
 import com.example.paq.DescribePlayerController;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public enum Wonder {
@@ -39,19 +40,19 @@ public enum Wonder {
 	
 	public final String effectDescription;
 
-	public final String imagePath;
+	public final String imagePathBack;
 
-	public final List<CardDecks.CardTypeQuantity> lstcardDecks;
+	public final ArrayList<CardDecks.CardTypeQuantity> lstcardDecks;
 
 
 	
 	// ------------------------------------------------------------------------
 	
-	Wonder(String displayName, String frenchName, String effectDescription, String imagePath,List<CardDecks.CardTypeQuantity> lstcardDecks ) {
+	Wonder(String displayName, String frenchName, String effectDescription, String imagePathBack, ArrayList<CardDecks.CardTypeQuantity> lstcardDecks) {
 		this.displayName = displayName;
 		this.frenchName = frenchName;
 		this.effectDescription = effectDescription;
-		this.imagePath = imagePath;
+		this.imagePathBack = imagePathBack;
 		this.lstcardDecks = lstcardDecks;
 	}
 }

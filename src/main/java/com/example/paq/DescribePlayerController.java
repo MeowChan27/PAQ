@@ -130,7 +130,7 @@ public class DescribePlayerController implements Initializable {
 
         for (int i = 0; i<lstTextField.toArray().length;i++){
             try {
-                lstImageWondersView.get(i).setImage(chargeImage(Game.getLstJoueur().get(i).getWonder().imagePath));
+                lstImageWondersView.get(i).setImage(chargeImage(Game.getLstJoueur().get(i).getWonder().imagePathBack));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
