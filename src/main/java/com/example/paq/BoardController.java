@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -26,13 +27,13 @@ public class  BoardController implements Initializable {
     @FXML
     Pane pane;
 
-    private final Button btnPiocher = new Button("Piocher");
-
-    private final int widthWonderImageView = 200/2;
-    private final int heightWonderImageView = 292/2;
+    private final int widthWonderImageView = 60;
+    private final int heightWonderImageView = 204;
     private final int numImages = Game.getNbrPlayer();
 
     private final ArrayList<Joueur> lstJoueur = Game.getLstJoueur();
+
+    private final ArrayList<ImageView> lstImageViewPioche = new ArrayList<>();
 
     public static Image chargeImage(String url) throws Exception{
         return new Image(Objects.requireNonNull(HelloApplication.class.getResource(url)).openStream());
@@ -46,14 +47,6 @@ public class  BoardController implements Initializable {
         circle.setFill(DODGERBLUE);
         circle.setOpacity(0.6);
         pane.getChildren().add(circle);
-
-        // Button
-        pane.getChildren().add(btnPiocher);
-        btnPiocher.setPrefWidth(150);
-        btnPiocher.setPrefHeight(5);
-        btnPiocher.setLayoutX((pane.getPrefWidth() - btnPiocher.getPrefWidth()) / 2);
-        btnPiocher.setLayoutY((pane.getPrefHeight() - btnPiocher.getPrefHeight()) / 2);
-        btnPiocher.setOnAction(this::piocher);
 
         // définir le nombre d'images et leur distance
 
@@ -75,7 +68,7 @@ public class  BoardController implements Initializable {
             try {
                 ImageView imageview = imageViews.get(k);
                 pane.getChildren().add(imageview);
-                imageview.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathBack));
+                imageview.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathFront));
                 // on met les cartes vers l'ext
                 // mageview.setRotate((imageview.getRotate()-90) + 360*i/numImages);
                 imageview.setFitWidth(widthWonderImageView);
@@ -94,10 +87,11 @@ public class  BoardController implements Initializable {
             double ysuivant = circle.getCenterY() + (circle.getRadius() * Math.sin((3 * Math.PI / 2 * numImages) + 2 * Math.PI * (k+1) / numImages));
             double xpioche = (x + xsuivant)/2;
             double ypioche = (y + ysuivant)/2;
-            imageViewPioche.setFitWidth((widthWonderImageView/2));
-            imageViewPioche.setFitHeight(heightWonderImageView/2);
-            imageViewPioche.setX(xpioche-widthWonderImageView/4);
-            imageViewPioche.setY(ypioche-heightWonderImageView/4);
+            imageViewPioche.setFitWidth((50));
+            imageViewPioche.setFitHeight(73);
+            imageViewPioche.setX(xpioche-25);
+            imageViewPioche.setY(ypioche-36);
+            lstImageViewPioche.add(imageViewPioche);
             try {
                 pane.getChildren().add(imageViewPioche);
                 imageViewPioche.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathBack));
@@ -105,14 +99,18 @@ public class  BoardController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+        // on boucle
+        lstImageViewPioche.add(lstImageViewPioche.get(0));
+        lstImageViewPioche.get(0).setOnMouseClicked(this::piocher);
+        lstImageViewPioche.get(1).setOnMouseClicked(this::piocher);
     }
 
     private int tourDuJoueur = 1;
-    public void piocher(ActionEvent event){
+    public void piocher(MouseEvent mouseEvent){
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
-        Circle circle = new Circle((pane.getPrefWidth())/2, (pane.getPrefHeight()/2), 350+heightWonderImageView/2);
+        Circle circle = new Circle((pane.getPrefWidth())/2, (pane.getPrefHeight()/2), 450);
             double x = circle.getCenterX() + (circle.getRadius() * Math.cos((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
             double y = circle.getCenterY() + (circle.getRadius() * Math.sin((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
             imageView.setX(x);
@@ -127,6 +125,9 @@ public class  BoardController implements Initializable {
                 throw new RuntimeException(e);
             }
             tourDuJoueur += 1;
+            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(null);
+            lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocher);
+            lstImageViewPioche.get(tourDuJoueur).setOnMouseClicked(this::piocher);
         }
     }
 
