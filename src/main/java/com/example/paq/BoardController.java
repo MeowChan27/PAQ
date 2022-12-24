@@ -102,7 +102,7 @@ public class  BoardController implements Initializable {
         // on boucle
         lstImageViewPioche.add(lstImageViewPioche.get(0));
         lstImageViewPioche.get(0).setOnMouseClicked(this::piocher);
-        lstImageViewPioche.get(1).setOnMouseClicked(this::piocher);
+        lstImageViewPioche.get(lstImageViewPioche.toArray().length-1).setOnMouseClicked(this::piocher);
     }
 
     private int tourDuJoueur = 1;
@@ -125,9 +125,14 @@ public class  BoardController implements Initializable {
                 throw new RuntimeException(e);
             }
             tourDuJoueur += 1;
-            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(null);
+            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocher);
             lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocher);
-            lstImageViewPioche.get(tourDuJoueur).setOnMouseClicked(this::piocher);
+            if (tourDuJoueur == 2){
+                lstImageViewPioche.get(lstImageViewPioche.toArray().length-1).setOnMouseClicked(null);
+            }
+            else {
+                lstImageViewPioche.get(tourDuJoueur-3).setOnMouseClicked(null);
+            }
         }
     }
 
