@@ -66,13 +66,12 @@ public class  BoardController implements Initializable {
             imageViews.get(k).setY(y - heightWonderImageView / 2);
             // on place les images
             try {
-                ImageView imageview = imageViews.get(k);
-                pane.getChildren().add(imageview);
-                imageview.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathFront));
+                pane.getChildren().add(imageView);
+                imageView.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathFront));
                 // on met les cartes vers l'ext
                 // mageview.setRotate((imageview.getRotate()-90) + 360*i/numImages);
-                imageview.setFitWidth(widthWonderImageView);
-                imageview.setFitHeight(heightWonderImageView);
+                imageView.setFitWidth(widthWonderImageView);
+                imageView.setFitHeight(heightWonderImageView);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -102,7 +101,7 @@ public class  BoardController implements Initializable {
         // on boucle
         lstImageViewPioche.add(lstImageViewPioche.get(0));
         lstImageViewPioche.get(0).setOnMouseClicked(this::piocher);
-        lstImageViewPioche.get(lstImageViewPioche.toArray().length-1).setOnMouseClicked(this::piocher);
+        lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(this::piocher);
     }
 
     private int tourDuJoueur = 1;
@@ -128,7 +127,7 @@ public class  BoardController implements Initializable {
             lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocher);
             lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocher);
             if (tourDuJoueur == 2){
-                lstImageViewPioche.get(lstImageViewPioche.toArray().length-1).setOnMouseClicked(null);
+                lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(null);
             }
             else {
                 lstImageViewPioche.get(tourDuJoueur-3).setOnMouseClicked(null);
