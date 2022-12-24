@@ -2,11 +2,12 @@ package com.example.paq.fr.isep.game7WonderArch.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CardDecks {
 
 	public static class CardTypeQuantity {
-		public final int quantity;
+		public int quantity;
 		public final CardType cardType;
 		public CardTypeQuantity(int quantity, CardType cardType) {
 			this.quantity = quantity;
@@ -19,6 +20,22 @@ public class CardDecks {
 				somme += card.quantity;
 			}
 			return somme;
+		}
+		public void drawCard(ArrayList<CardTypeQuantity> cardTypeQuantities){
+			int totalIndex = getNbrQuantity(cardTypeQuantities);
+			int drawedIndex = ThreadLocalRandom.current().nextInt(0, totalIndex);
+			for (int i = 0; i < cardTypeQuantities.size(); i++){
+				drawedIndex -= cardTypeQuantities.get(i).quantity;
+				if (drawedIndex <= 0){
+					cardTypeQuantities.get(i).quantity -= 1;
+					if (cardTypeQuantities.get(i).quantity <= 0){
+						cardTypeQuantities.remove(i);
+						System.out.println("Tu pioche ta dernière " + cardTypeQuantities.get(i));
+					}else{
+						System.out.println("Tu pioche un " + cardTypeQuantities.get(drawedIndex) + " il t'en reste "+ cardTypeQuantities.get(drawedIndex).quantity);
+					}
+				}
+			}
 		}
 	}
 	
