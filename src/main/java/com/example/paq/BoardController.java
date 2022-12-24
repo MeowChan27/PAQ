@@ -98,13 +98,21 @@ public class  BoardController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+        //
+
+
         // on boucle
         lstImageViewPioche.add(lstImageViewPioche.get(0));
-        lstImageViewPioche.get(0).setOnMouseClicked(this::piocher);
+        lstImageViewPioche.get(0).setOnMouseClicked(this::piocherG);
         lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(this::piocher);
     }
 
     private int tourDuJoueur = 1;
+
+    public void piocherG(MouseEvent mouseEvent){
+        piocher(mouseEvent);
+        lstJoueur.get(tourDuJoueur-1).setDeckCardQuantities(lstJoueur.get(tourDuJoueur-1).getDeckCardQuantities());
+    }
     public void piocher(MouseEvent mouseEvent){
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;

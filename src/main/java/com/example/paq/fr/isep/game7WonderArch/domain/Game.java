@@ -27,6 +27,8 @@ public class Game {
 
     private static ArrayList<ProgressToken> lstProgressToken = new ArrayList<>();
 
+    private static ArrayList<ArrayList<CardDecks.CardTypeQuantity>> deckCardQuantitiesAll = new ArrayList<>();
+
 
     // encapulsation
 
@@ -49,6 +51,14 @@ public class Game {
     public static ArrayList<String> getLstPlayerName(){return lstPlayerName;}
 
     public static void setLstPlayerName(ArrayList<String> lstPlayerName){Game.lstPlayerName = lstPlayerName;}
+
+    public static ArrayList<ArrayList<CardDecks.CardTypeQuantity>> getDeckCardQuantitiesAll(){
+        return deckCardQuantitiesAll;
+    }
+
+    public static void setDeckCardQuantities(int indice, CardType cardType){
+        //deckCardQuantitiesAll.get(indice).remove();
+    }
 
     public static void fillLstWondersPossibles(){
         lstWondersPossibles.add(Wonder.Alexandrie);
@@ -79,21 +89,12 @@ public class Game {
         lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, wonder.lstcardDecks, 0, lstCardType,lstProgressToken));
     }
 
-    // HashMap entre les wonders et les LstCardType associées à ces wonders
-    /*
-    public static void hashMapWonderLstCardTypeQuantity(){
-        hashMapWonderLstCardTypeQuantity.put(Wonder.Alexandrie,CardDecks.deckCardQuantities_Alexandrie);
-        hashMapWonderLstCardTypeQuantity.put(Wonder.Gizeh,CardDecks.deckCardQuantities_Gizeh);
-        hashMapWonderLstCardTypeQuantity.put(Wonder.Ephese,CardDecks.deckCardQuantities_Ephese);
-        hashMapWonderLstCardTypeQuantity.put(Wonder.Olympie,CardDecks.deckCardQuantities_Olympie);
-        hashMapWonderLstCardTypeQuantity.put(Wonder.Babylone,CardDecks.deckCardQuantities_Babylon);
-        hashMapWonderLstCardTypeQuantity.put(Wonder.Rhodes,CardDecks.deckCardQuantities_Rhodes);
-        hashMapWonderLstCardTypeQuantity.put(Wonder.Halicarnasse,CardDecks.deckCardQuantities_Halicarnasse);
-    }
-    */
-
-    public static void  chooseCardLeftPacket(){
+    public static void chooseCardLeftPacket(){
         //
+    }
+
+    public static void chooseCardPacket(Wonder wonder){
+
     }
 
 }

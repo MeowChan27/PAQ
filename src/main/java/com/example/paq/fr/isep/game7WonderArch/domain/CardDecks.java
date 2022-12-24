@@ -12,11 +12,20 @@ public class CardDecks {
 			this.quantity = quantity;
 			this.cardType = cardType;
 		}
+
+		public int getNbrQuantity(ArrayList<CardTypeQuantity> cardTypeQuantities){
+			int somme = 0;
+			for (CardTypeQuantity card : cardTypeQuantities){
+				somme += card.quantity;
+			}
+			return somme;
+		}
 	}
 	
 	/** Card Types x Quantities for Gizeh Deck */
 	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Gizeh = new ArrayList<>(Arrays.asList(
 			// List of CardTypeQuantity
+
 			// material
 			new CardTypeQuantity(2, CardType.CardMaterialWood), //
 			new CardTypeQuantity(2, CardType.CardMaterialPaper), //
@@ -101,7 +110,8 @@ public class CardDecks {
 	));
 
 	/** Card Types x Quantities for Alexandrie Deck */
-	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Alexandrie = new ArrayList<>(Arrays.asList(// material
+	public static final ArrayList<CardTypeQuantity> deckCardQuantities_Alexandrie = new ArrayList<>(Arrays.asList(
+			// material
 			new CardTypeQuantity(2, CardType.CardMaterialWood), //
 			new CardTypeQuantity(2, CardType.CardMaterialPaper), //
 			new CardTypeQuantity(2, CardType.CardMaterialBrick), //
@@ -183,4 +193,5 @@ public class CardDecks {
 			new CardTypeQuantity(4, CardType.CardPolitic_emperor), //
 			new CardTypeQuantity(8, CardType.CardPolitic_cat) //
 	));
+
 }
