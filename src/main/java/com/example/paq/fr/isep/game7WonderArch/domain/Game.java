@@ -1,13 +1,6 @@
 package com.example.paq.fr.isep.game7WonderArch.domain;
-
-import com.example.paq.BoardController;
-import com.example.paq.DescribePlayerController;
-import javafx.scene.image.Image;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class Game {
 
@@ -89,12 +82,10 @@ public class Game {
         lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, wonder.lstcardDecks, 0, lstCardType,lstProgressToken));
     }
 
-    public static void chooseCardLeftPacket(){
-        //
+    public static void playCardDraw(Joueur joueur){
+        CardDecks.CardTypeQuantity.drawCard(joueur.getWonder().lstcardDecks);
     }
 
-    public static void chooseCardPacket(Wonder wonder){
 
-    }
 
 }

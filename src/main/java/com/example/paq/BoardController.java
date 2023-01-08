@@ -82,14 +82,14 @@ public class  BoardController implements Initializable {
 
             // placer pioche (gauche)
             ImageView imageViewPioche = new ImageView();
-            double xsuivant = circle.getCenterX() + (circle.getRadius() * Math.cos((3 * Math.PI / 2 * numImages) + 2 * Math.PI * (k+1) / numImages));
-            double ysuivant = circle.getCenterY() + (circle.getRadius() * Math.sin((3 * Math.PI / 2 * numImages) + 2 * Math.PI * (k+1) / numImages));
-            double xpioche = (x + xsuivant)/2;
-            double ypioche = (y + ysuivant)/2;
+            double xsuivant = circle.getCenterX() + (circle.getRadius() * Math.cos((3 * Math.PI / 2 * numImages) + 2 * Math.PI * (k + 1) / numImages));
+            double ysuivant = circle.getCenterY() + (circle.getRadius() * Math.sin((3 * Math.PI / 2 * numImages) + 2 * Math.PI * (k + 1) / numImages));
+            double xpioche = (x + xsuivant) / 2;
+            double ypioche = (y + ysuivant) / 2;
             imageViewPioche.setFitWidth((50));
             imageViewPioche.setFitHeight(73);
-            imageViewPioche.setX(xpioche-25);
-            imageViewPioche.setY(ypioche-36);
+            imageViewPioche.setX(xpioche - 25);
+            imageViewPioche.setY(ypioche - 36);
             lstImageViewPioche.add(imageViewPioche);
             try {
                 pane.getChildren().add(imageViewPioche);
@@ -98,8 +98,6 @@ public class  BoardController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
-        //
-
 
         // on boucle
         lstImageViewPioche.add(lstImageViewPioche.get(0));
@@ -113,7 +111,9 @@ public class  BoardController implements Initializable {
         piocher(mouseEvent);
         lstJoueur.get(tourDuJoueur-1).setDeckCardQuantities(lstJoueur.get(tourDuJoueur-1).getDeckCardQuantities());
     }
+
     public void piocher(MouseEvent mouseEvent){
+        Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
