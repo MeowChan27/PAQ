@@ -67,9 +67,9 @@ public class  BoardController implements Initializable {
             // on place les images
             try {
                 pane.getChildren().add(imageView);
+                System.out.println(lstJoueur.get(k).getName());
+                System.out.println(lstJoueur.get(k).getWonder().imagePathFront);
                 imageView.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathFront));
-                // on met les cartes vers l'ext
-                // mageview.setRotate((imageview.getRotate()-90) + 360*i/numImages);
                 imageView.setFitWidth(widthWonderImageView);
                 imageView.setFitHeight(heightWonderImageView);
             } catch (Exception e) {
@@ -102,18 +102,22 @@ public class  BoardController implements Initializable {
         // on boucle
         lstImageViewPioche.add(lstImageViewPioche.get(0));
         lstImageViewPioche.get(0).setOnMouseClicked(this::piocherG);
-        lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(this::piocher);
+        lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(this::piocherD);
     }
 
     private int tourDuJoueur = 1;
 
     public void piocherG(MouseEvent mouseEvent){
+        Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
         piocher(mouseEvent);
-        lstJoueur.get(tourDuJoueur-1).setDeckCardQuantities(lstJoueur.get(tourDuJoueur-1).getDeckCardQuantities());
+    }
+
+    public void piocherD(MouseEvent mouseEvent){
+        Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
+        piocher(mouseEvent);
     }
 
     public void piocher(MouseEvent mouseEvent){
-        Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
@@ -128,11 +132,12 @@ public class  BoardController implements Initializable {
             pane.getChildren().add(imageView);
             try {
                 imageView.setImage(chargeImage("cards/card-progress-architect.png"));
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 throw new RuntimeException(e);
             }
             tourDuJoueur += 1;
-            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocher);
+            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocherG);
             lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocher);
             if (tourDuJoueur == 2){
                 lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(null);

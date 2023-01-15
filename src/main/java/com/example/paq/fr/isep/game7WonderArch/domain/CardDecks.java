@@ -21,22 +21,25 @@ public class CardDecks {
 			}
 			return somme;
 		}
-		public static void drawCard(ArrayList<CardTypeQuantity> cardTypeQuantities){
+		public static CardTypeQuantity drawCard(ArrayList<CardTypeQuantity> cardTypeQuantities){
 			int totalIndex = getNbrQuantity(cardTypeQuantities);
 			int drawedIndex = ThreadLocalRandom.current().nextInt(0, totalIndex);
 			for (int i = 0; i < cardTypeQuantities.size(); i++){
 				drawedIndex -= cardTypeQuantities.get(i).quantity;
 				if (drawedIndex <= 0){
 					cardTypeQuantities.get(i).quantity -= 1;
+					CardTypeQuantity cardReturn = cardTypeQuantities.get(i);
 					if (cardTypeQuantities.get(i).quantity <= 0){
+						System.out.println("Tu pioches ta dernière " + cardTypeQuantities.get(i));
 						cardTypeQuantities.remove(i);
-						System.out.println("Tu pioche ta dernière " + cardTypeQuantities.get(i));
 					}
 					else{
-						System.out.println("Tu pioche un " + cardTypeQuantities.get(drawedIndex) + " il t'en reste "+ cardTypeQuantities.get(drawedIndex).quantity);
+						System.out.println("Tu pioches un " + cardTypeQuantities.get(i) + " il t'en reste " + cardTypeQuantities.get(i).quantity);
 					}
+					return cardReturn;
 				}
 			}
+		return null;
 		}
 	}
 	

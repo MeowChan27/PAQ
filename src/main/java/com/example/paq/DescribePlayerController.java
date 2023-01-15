@@ -121,19 +121,6 @@ public class DescribePlayerController implements Initializable {
     public void validerBtn(ActionEvent event){
         HashMap<LocalDate,String> hashMapDatePlayerName = new HashMap<>();
         for (int i = 0; i<lstTextField.toArray().length;i++){
-            // On stocke la liste des joueurs tel que donnée dans la vue describePlayerController
-            lstNamePlayer.add(lstTextField.get(i).getText());
-            Game.setLstPlayerName(lstNamePlayer);
-        }
-        // chaque joueur est crée avec un wonder diff
-        Game.chooseRandomWonders();
-
-        for (int i = 0; i<lstTextField.toArray().length;i++){
-            try {
-                lstImageWondersView.get(i).setImage(chargeImage(Game.getLstJoueur().get(i).getWonder().imagePathBack));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
             // hashMap entre les Date et les Joueurs
             hashMapDatePlayerName.put(lstDatePicker.get(i).getValue(), lstTextField.get(i).getText());
             lstDatePlayer.add(lstDatePicker.get(i).getValue());
@@ -143,11 +130,14 @@ public class DescribePlayerController implements Initializable {
         // on sauvegarde les données dans Game
         Game.setLstPlayerDate(lstDatePlayer);
         // on trie les name selon les dates
+        ArrayList <String> lstPlayerName = new ArrayList<>();
         for (int i = 0; i<lstDatePlayer.toArray().length;i++){
-            lstNamePlayer.add(hashMapDatePlayerName.get(lstDatePlayer.get(i)));
+            lstPlayerName.add(hashMapDatePlayerName.get(lstDatePlayer.get(i)));
         }
         // on remplace lstNamePlayer par la liste triée
-        Game.setLstPlayerName(lstNamePlayer);
+        Game.setLstPlayerName(lstPlayerName);
+        // chaque joueur est crée avec un wonder diff        Game.chooseRandomWonders();
+        Game.chooseRandomWonders();
         validerBtn.setVisible(false);
         validerBtn.setDisable(true);
         pane.getChildren().add(BtnCommencerLaPartie);
