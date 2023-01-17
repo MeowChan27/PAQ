@@ -84,8 +84,8 @@ public class  BoardController implements Initializable {
             ImageView imageViewPioche = new ImageView();
             double xsuivant = circle.getCenterX() + (circle.getRadius() * Math.cos((3 * Math.PI / 2 * numImages) + 2 * Math.PI * (k + 1) / numImages));
             double ysuivant = circle.getCenterY() + (circle.getRadius() * Math.sin((3 * Math.PI / 2 * numImages) + 2 * Math.PI * (k + 1) / numImages));
-            double xpioche = (x + xsuivant) / 2;
-            double ypioche = (y + ysuivant) / 2;
+            double xpioche = (x + xsuivant)/2;
+            double ypioche = (y + ysuivant)/2;
             imageViewPioche.setFitWidth((50));
             imageViewPioche.setFitHeight(73);
             imageViewPioche.setX(xpioche - 25);
@@ -97,7 +97,11 @@ public class  BoardController implements Initializable {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+
         }
+        // Start
+        imageViews.get(0).setScaleX(2);
+        System.out.println(lstJoueur.get(0).getDeckCardQuantities().toArray().length);
 
         // on boucle
         lstImageViewPioche.add(lstImageViewPioche.get(0));
@@ -108,16 +112,18 @@ public class  BoardController implements Initializable {
     private int tourDuJoueur = 1;
 
     public void piocherG(MouseEvent mouseEvent){
-        Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
-        piocher(mouseEvent);
+        CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
+        piocher(mouseEvent,cardPiocher);
+        System.out.println(CardDecks.CardTypeQuantity.getNbrQuantity(lstJoueur.get(0).getDeckCardQuantities()));
     }
 
     public void piocherD(MouseEvent mouseEvent){
-        Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
-        piocher(mouseEvent);
+        CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
+        piocher(mouseEvent,cardPiocher);
+        System.out.println(lstJoueur.get(0).getDeckCardQuantities().toArray().length);
     }
 
-    public void piocher(MouseEvent mouseEvent){
+    public void piocher(MouseEvent mouseEvent, CardDecks.CardTypeQuantity cardPiocher){
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
@@ -130,15 +136,18 @@ public class  BoardController implements Initializable {
             imageView.setFitWidth(widthWonderCardView);
             imageView.setFitHeight(heightWonderCardView);
             pane.getChildren().add(imageView);
+
             try {
-                imageView.setImage(chargeImage("cards/card-progress-architect.png"));
+                String pathImage = cardPiocher.cardType.imageResource;
+                System.out.println(pathImage);
+                imageView.setImage(chargeImage(pathImage));
             }
             catch (Exception e) {
                 throw new RuntimeException(e);
             }
             tourDuJoueur += 1;
             lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocherG);
-            lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocher);
+            lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocherD);
             if (tourDuJoueur == 2){
                 lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(null);
             }

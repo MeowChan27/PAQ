@@ -82,8 +82,9 @@ public class Game {
         lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, wonder.lstcardDecks, 0, lstCardType,lstProgressToken));
     }
 
-    public static void playCardDraw(Joueur joueur){
-        CardDecks.CardTypeQuantity.drawCard(joueur.getWonder().lstcardDecks);
+    public static CardDecks.CardTypeQuantity playCardDraw(Joueur joueur){
+        CardDecks.CardTypeQuantity cardPiocher = CardDecks.CardTypeQuantity.drawCard(joueur.getWonder().lstcardDecks);
+        return cardPiocher;
     }
 
 

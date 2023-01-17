@@ -23,7 +23,7 @@ public class Joueur {
     private int points;
     private int nbrJetonMilitaire;
     private boolean cat;
-    private List<CardDecks.CardTypeQuantity> deckCardQuantities;
+    private ArrayList<CardDecks.CardTypeQuantity> deckCardQuantities;
     private int totalShield;
     private ArrayList<CardType> lstPlayerCard;
     private ArrayList<ProgressToken> lstPlayerProgressToken;
@@ -35,7 +35,7 @@ public class Joueur {
            int points,
            int nbrJetonMilitaire,
            boolean cat,
-           List<CardDecks.CardTypeQuantity> deckCardQuantities,
+           ArrayList<CardDecks.CardTypeQuantity> deckCardQuantities,
            int totalShield,
            ArrayList<CardType> lstPlayerCard,
            ArrayList<ProgressToken> lstPlayerProgressToken){
@@ -94,11 +94,11 @@ public class Joueur {
         cat = bool;
     }
 
-    public List<CardDecks.CardTypeQuantity> getDeckCardQuantities(){
+    public ArrayList<CardDecks.CardTypeQuantity> getDeckCardQuantities(){
         return deckCardQuantities;
     }
 
-    public void setDeckCardQuantities(List<CardDecks.CardTypeQuantity> deckCardQuantities){
+    public void setDeckCardQuantities(ArrayList<CardDecks.CardTypeQuantity> deckCardQuantities){
         this.deckCardQuantities = deckCardQuantities;
     }
 
@@ -133,7 +133,5 @@ public class Joueur {
     public void setLstPlayerProgressToken(ProgressToken progressToken){
         lstPlayerProgressToken.add(progressToken);
     }
-
-    // methodes
 
 }

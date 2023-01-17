@@ -33,7 +33,8 @@ public class CardDecks {
 						System.out.println("Tu pioches ta dernière " + cardTypeQuantities.get(i));
 						cardTypeQuantities.remove(i);
 					}
-					else{
+					else
+					{
 						System.out.println("Tu pioches un " + cardTypeQuantities.get(i) + " il t'en reste " + cardTypeQuantities.get(i).quantity);
 					}
 					return cardReturn;
