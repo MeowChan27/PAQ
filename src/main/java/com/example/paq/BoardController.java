@@ -128,28 +128,30 @@ public class  BoardController implements Initializable {
     private int tourDuJoueur = 1;
 
     public void piocherG(MouseEvent mouseEvent){
-        CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
+        // joueur pioche = joueur deck
+        CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-1),lstJoueur.get(tourDuJoueur-1));
         piocher(mouseEvent,cardPiocher);
     }
 
     public void piocherD(MouseEvent mouseEvent){
-        int i = 0;
         if (tourDuJoueur == 1){
-            i = 1;
+            // joueur pioche = joueur deck - 1
+            CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-1),lstJoueur.get(lstJoueur.toArray().length-1));
+            piocher(mouseEvent,cardPiocher);
         }
         else{
-            i = 2;
+            CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-1),lstJoueur.get(tourDuJoueur-2));
+            piocher(mouseEvent,cardPiocher);
         }
-        CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-i));
-        piocher(mouseEvent,cardPiocher);
     }
 
     public void piocher(MouseEvent mouseEvent, CardDecks.CardTypeQuantity cardPiocher){
+        System.out.println(tourDuJoueur);
         ImageView imageView = new ImageView();
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
         Circle circle = new Circle((pane.getPrefWidth())/2, (pane.getPrefHeight()/2), 450);
-            System.out.println(lstJoueur.get(tourDuJoueur-1).getLstPlayerCard());
+        System.out.println("la carte piocher est : " + cardPiocher);
             double x = 50*(lstJoueur.get(tourDuJoueur-1).getLstPlayerCard().toArray().length);
             double y = ((tourDuJoueur-1)*pane.getPrefHeight()+40)/numImages;
             // double x = circle.getCenterX() + (circle.getRadius() * Math.cos((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
@@ -169,6 +171,7 @@ public class  BoardController implements Initializable {
                 throw new RuntimeException(e);
             }
             tourDuJoueur += 1;
+
             lstImageViewPioche.get(tourDuJoueur-2).setScaleX(2);
             lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocherD);
             lstImageViewPioche.get(tourDuJoueur-1).setScaleY(2);
@@ -179,10 +182,13 @@ public class  BoardController implements Initializable {
             else {
                 lstImageViewPioche.get(tourDuJoueur-3).setOnMouseClicked(null);
             }
+        System.out.println("JOUEURS \n");
         System.out.println(lstJoueur.get(0).getLstPlayerCard());
         System.out.println(lstJoueur.get(1).getLstPlayerCard());
         System.out.println(lstJoueur.get(2).getLstPlayerCard());
-
+        if (tourDuJoueur == numImages+1){
+            tourDuJoueur = 1;
+        }
     }
     }
 
