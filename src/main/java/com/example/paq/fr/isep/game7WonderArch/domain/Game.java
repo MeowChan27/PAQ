@@ -79,11 +79,15 @@ public class Game {
 
     // init Player
     public static void initPlayer(String name, Wonder wonder){
-        lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, wonder.lstcardDecks, 0, lstCardType,lstProgressToken));
+        lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, wonder.lstcardDecks, 0, new ArrayList<CardType>(),new ArrayList<ProgressToken>()));
     }
 
     public static CardDecks.CardTypeQuantity playCardDraw(Joueur joueur){
         CardDecks.CardTypeQuantity cardPiocher = CardDecks.CardTypeQuantity.drawCard(joueur.getWonder().lstcardDecks);
+        CardType card = cardPiocher.cardType;
+        ArrayList <CardType> playerCards = joueur.getLstPlayerCard();
+        playerCards.add(card);
+        joueur.setLstPlayerCard(playerCards);
         return cardPiocher;
     }
 

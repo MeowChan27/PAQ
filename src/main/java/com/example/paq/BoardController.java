@@ -6,10 +6,13 @@ import com.example.paq.fr.isep.game7WonderArch.domain.Joueur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -67,8 +70,6 @@ public class  BoardController implements Initializable {
             // on place les images
             try {
                 pane.getChildren().add(imageView);
-                System.out.println(lstJoueur.get(k).getName());
-                System.out.println(lstJoueur.get(k).getWonder().imagePathFront);
                 imageView.setImage(chargeImage(lstJoueur.get(k).getWonder().imagePathFront));
                 imageView.setFitWidth(widthWonderImageView);
                 imageView.setFitHeight(heightWonderImageView);
@@ -98,6 +99,21 @@ public class  BoardController implements Initializable {
                 throw new RuntimeException(e);
             }
 
+            // Partie de gauche
+                Separator separator = new Separator(Orientation.HORIZONTAL);
+                pane.getChildren().add(separator);
+                separator.setPrefWidth(480);
+                separator.setPrefHeight(0);
+                separator.setLayoutX(0);
+                separator.setLayoutY(k*pane.getPrefHeight()/numImages);
+
+                Label labelPlayerName = new Label();
+                pane.getChildren().add(labelPlayerName);
+                labelPlayerName.setPrefWidth(80);
+                labelPlayerName.setLayoutX(20);
+                labelPlayerName.setLayoutY((k*pane.getPrefHeight()+20)/numImages);
+                labelPlayerName.setText("Nom du joueur : " + lstJoueur.get(k).getName());
+
         }
         // Start
         imageViews.get(0).setScaleX(2);
@@ -114,13 +130,18 @@ public class  BoardController implements Initializable {
     public void piocherG(MouseEvent mouseEvent){
         CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
         piocher(mouseEvent,cardPiocher);
-        System.out.println(CardDecks.CardTypeQuantity.getNbrQuantity(lstJoueur.get(0).getDeckCardQuantities()));
     }
 
     public void piocherD(MouseEvent mouseEvent){
-        CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-1));
+        int i = 0;
+        if (tourDuJoueur == 1){
+            i = 1;
+        }
+        else{
+            i = 2;
+        }
+        CardDecks.CardTypeQuantity cardPiocher = Game.playCardDraw(lstJoueur.get(tourDuJoueur-i));
         piocher(mouseEvent,cardPiocher);
-        System.out.println(lstJoueur.get(0).getDeckCardQuantities().toArray().length);
     }
 
     public void piocher(MouseEvent mouseEvent, CardDecks.CardTypeQuantity cardPiocher){
@@ -128,8 +149,11 @@ public class  BoardController implements Initializable {
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
         Circle circle = new Circle((pane.getPrefWidth())/2, (pane.getPrefHeight()/2), 450);
-            double x = circle.getCenterX() + (circle.getRadius() * Math.cos((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
-            double y = circle.getCenterY() + (circle.getRadius() * Math.sin((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
+            System.out.println(lstJoueur.get(tourDuJoueur-1).getLstPlayerCard());
+            double x = 50*(lstJoueur.get(tourDuJoueur-1).getLstPlayerCard().toArray().length);
+            double y = ((tourDuJoueur-1)*pane.getPrefHeight()+40)/numImages;
+            // double x = circle.getCenterX() + (circle.getRadius() * Math.cos((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
+            // double y = circle.getCenterY() + (circle.getRadius() * Math.sin((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
             imageView.setX(x);
             imageView.setY(y);
             // imageView.setRotate((imageView.getRotate()-90) + 360*tourDuJoueur/numImages);
@@ -139,21 +163,26 @@ public class  BoardController implements Initializable {
 
             try {
                 String pathImage = cardPiocher.cardType.imageResource;
-                System.out.println(pathImage);
                 imageView.setImage(chargeImage(pathImage));
             }
             catch (Exception e) {
                 throw new RuntimeException(e);
             }
             tourDuJoueur += 1;
-            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocherG);
-            lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocherD);
+            lstImageViewPioche.get(tourDuJoueur-2).setScaleX(2);
+            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocherD);
+            lstImageViewPioche.get(tourDuJoueur-1).setScaleY(2);
+            lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocherG);
             if (tourDuJoueur == 2){
                 lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(null);
             }
             else {
                 lstImageViewPioche.get(tourDuJoueur-3).setOnMouseClicked(null);
             }
-        }
+        System.out.println(lstJoueur.get(0).getLstPlayerCard());
+        System.out.println(lstJoueur.get(1).getLstPlayerCard());
+        System.out.println(lstJoueur.get(2).getLstPlayerCard());
+
+    }
     }
 
