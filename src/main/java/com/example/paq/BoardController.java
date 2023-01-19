@@ -171,24 +171,54 @@ public class  BoardController implements Initializable {
                 throw new RuntimeException(e);
             }
             tourDuJoueur += 1;
-
-            lstImageViewPioche.get(tourDuJoueur-2).setScaleX(2);
-            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocherD);
-            lstImageViewPioche.get(tourDuJoueur-1).setScaleY(2);
+            if (tourDuJoueur == numImages+1){
+                lstImageViewPioche.get(numImages+1-2).setOnMouseEntered(event -> scaleUp(event,lstImageViewPioche.get(numImages+1-2)));
+                lstImageViewPioche.get(numImages+1-2).setOnMouseExited(event -> scaleDown(event,lstImageViewPioche.get(numImages+1-2)));
+            }
+            else{
+                lstImageViewPioche.get(tourDuJoueur-2).setOnMouseEntered(event -> scaleUp(event,lstImageViewPioche.get(tourDuJoueur-2)));
+                lstImageViewPioche.get(tourDuJoueur-2).setOnMouseExited(event -> scaleDown(event,lstImageViewPioche.get(tourDuJoueur-2)));
+            }
+            lstImageViewPioche.get(tourDuJoueur-1).setOnMouseEntered(event -> scaleUp(event,lstImageViewPioche.get(tourDuJoueur-1)));
+            lstImageViewPioche.get(tourDuJoueur-1).setOnMouseExited(event -> scaleDown(event,lstImageViewPioche.get(tourDuJoueur-1)));
             lstImageViewPioche.get(tourDuJoueur-1).setOnMouseClicked(this::piocherG);
+
+            lstImageViewPioche.get(tourDuJoueur-2).setOnMouseClicked(this::piocherD);
             if (tourDuJoueur == 2){
+                lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setScaleX(1);
+                lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setScaleY(1);
+                lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseEntered(null);
+                lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseExited(null);
                 lstImageViewPioche.get(lstImageViewPioche.toArray().length-2).setOnMouseClicked(null);
             }
             else {
+                lstImageViewPioche.get(tourDuJoueur-3).setScaleX(1);
+                lstImageViewPioche.get(tourDuJoueur-3).setScaleY(1);
                 lstImageViewPioche.get(tourDuJoueur-3).setOnMouseClicked(null);
+                lstImageViewPioche.get(tourDuJoueur-3).setOnMouseEntered(null);
+                lstImageViewPioche.get(tourDuJoueur-3).setOnMouseExited(null);
             }
+
+            // Etat du jeu
         System.out.println("JOUEURS \n");
         System.out.println(lstJoueur.get(0).getLstPlayerCard());
         System.out.println(lstJoueur.get(1).getLstPlayerCard());
         System.out.println(lstJoueur.get(2).getLstPlayerCard());
+
         if (tourDuJoueur == numImages+1){
             tourDuJoueur = 1;
         }
     }
+
+    public void scaleUp(MouseEvent mouseEvent, ImageView imageView){
+        imageView.setScaleX(2);
+        imageView.setScaleY(2);
+    }
+
+    public void scaleDown(MouseEvent mouseEvent, ImageView imageView){
+        imageView.setScaleX(1);
+        imageView.setScaleY(1);
+    }
+
     }
 
