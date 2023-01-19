@@ -82,8 +82,8 @@ public class Game {
         lstJoueur.add(new Joueur(name,wonder, 0,0,0, false, wonder.lstcardDecks, 0, new ArrayList<CardType>(),new ArrayList<ProgressToken>()));
     }
 
-    public static CardDecks.CardTypeQuantity playCardDraw(Joueur joueurQuiPioche, Joueur joueurDeck){
-        CardDecks.CardTypeQuantity cardPiocher = CardDecks.CardTypeQuantity.drawCard(joueurDeck.getWonder().lstcardDecks);
+    public static CardDecks.CardTypeQuantity playCardDraw(Joueur joueurQuiPioche, Joueur joueurDeck, CardDecks.CardTypeQuantity cardPiocher){
+        // CardDecks.CardTypeQuantity cardPiocher = CardDecks.CardTypeQuantity.drawCard(joueurDeck.getWonder().lstcardDecks);
         CardType card = cardPiocher.cardType;
         ArrayList <CardType> playerCards = joueurQuiPioche.getLstPlayerCard();
         playerCards.add(card);

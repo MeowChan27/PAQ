@@ -21,27 +21,29 @@ public class CardDecks {
 			}
 			return somme;
 		}
-		public static CardTypeQuantity drawCard(ArrayList<CardTypeQuantity> cardTypeQuantities){
+		public static void drawCard(ArrayList<CardTypeQuantity> cardTypeQuantities, CardTypeQuantity cardDefausse){
+			cardDefausse.quantity -= 1;
+			if (cardDefausse.quantity == 0){
+				cardTypeQuantities.remove(cardDefausse);
+			}
+			System.out.println("Vous avez pioché : " + cardDefausse.cardType + " il vous en reste " + cardDefausse.quantity);
+		}
+
+		public static CardTypeQuantity nextCard(ArrayList<CardTypeQuantity> cardTypeQuantities){
 			int totalIndex = getNbrQuantity(cardTypeQuantities);
 			int drawedIndex = ThreadLocalRandom.current().nextInt(0, totalIndex);
 			for (int i = 0; i < cardTypeQuantities.size(); i++){
 				drawedIndex -= cardTypeQuantities.get(i).quantity;
-				if (drawedIndex <= 0){
-					cardTypeQuantities.get(i).quantity -= 1;
+				if (drawedIndex <= 0) {
 					CardTypeQuantity cardReturn = cardTypeQuantities.get(i);
-					if (cardTypeQuantities.get(i).quantity <= 0){
-						// System.out.println("Tu pioches ta dernière " + cardTypeQuantities.get(i));
-						cardTypeQuantities.remove(i);
-					}
-					else
-					{
-						// System.out.println("Tu pioches un " + cardTypeQuantities.get(i) + " il t'en reste " + cardTypeQuantities.get(i).quantity);
-					}
 					return cardReturn;
 				}
 			}
-		return null;
+			return null;
 		}
+
+
+
 	}
 	
 	/** Card Types x Quantities for Gizeh Deck */
