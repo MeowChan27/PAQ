@@ -84,6 +84,7 @@ public class Game {
 
     public static CardDecks.CardTypeQuantity playCardDraw(Joueur joueurQuiPioche, Joueur joueurDeck, CardDecks.CardTypeQuantity cardPiocher){
         // CardDecks.CardTypeQuantity cardPiocher = CardDecks.CardTypeQuantity.drawCard(joueurDeck.getWonder().lstcardDecks);
+        CardDecks.CardTypeQuantity.drawCard(joueurDeck.getDeckCardQuantities(),cardPiocher);
         CardType card = cardPiocher.cardType;
         ArrayList <CardType> playerCards = joueurQuiPioche.getLstPlayerCard();
         playerCards.add(card);

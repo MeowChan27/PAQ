@@ -22,11 +22,12 @@ public class CardDecks {
 			return somme;
 		}
 		public static void drawCard(ArrayList<CardTypeQuantity> cardTypeQuantities, CardTypeQuantity cardDefausse){
-			cardDefausse.quantity -= 1;
-			if (cardDefausse.quantity == 0){
+			int index = cardTypeQuantities.indexOf(cardDefausse);
+			cardTypeQuantities.get(index).quantity -= 1;
+			if (cardTypeQuantities.get(index).quantity == 0){
 				cardTypeQuantities.remove(cardDefausse);
 			}
-			System.out.println("Vous avez pioché : " + cardDefausse.cardType + " il vous en reste " + cardDefausse.quantity);
+			System.out.println("Vous avez pioché : " + cardDefausse.cardType + " il vous en reste " + cardTypeQuantities.get(index).quantity);
 		}
 
 		public static CardTypeQuantity nextCard(ArrayList<CardTypeQuantity> cardTypeQuantities){

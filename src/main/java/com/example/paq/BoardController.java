@@ -195,7 +195,6 @@ public class  BoardController implements Initializable {
         int widthWonderCardView = 200/3;
         int heightWonderCardView = 292/3;
         Circle circle = new Circle((pane.getPrefWidth())/2, (pane.getPrefHeight()/2), 450);
-        System.out.println("la carte piochée est : " + cardPiocher);
             double x = 50*(lstJoueur.get(tourDuJoueur-1).getLstPlayerCard().toArray().length);
             double y = ((tourDuJoueur-1)*pane.getPrefHeight()+80)/numImages;
             // double x = circle.getCenterX() + (circle.getRadius() * Math.cos((3*Math.PI/2*numImages)+2*Math.PI*(tourDuJoueur-1)/numImages));
