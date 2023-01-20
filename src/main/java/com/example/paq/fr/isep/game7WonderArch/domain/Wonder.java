@@ -10,30 +10,35 @@ public enum Wonder {
 
 	// Wonder are 'les merveilles'
 
-	Alexandrie("Alexandrie", "Alexandrie", //
+	// etage
+
+	// [[2,0]] : 2 ressources identiques
+
+	Alexandrie(5,"Alexandrie", "Alexandrie", //
 			"Prenez la première carte d'une pioche au choix, n'importe où sur la table, et posez-la devant vous","decks/deck-alexandrie.png","cards/card-back/card-back-alexandrie.png", CardDecks.deckCardQuantities_Alexandrie),
 	
-	Halicarnasse("Halicarnasse", "Halicarnasse", //
+	Halicarnasse(4,"Halicarnasse", "Halicarnasse", //
 			"Prenez les 5 premières cartes de la pioche à votre gauche ou à votre droite, choisissez-en 1 et posez-la devant vous" //
 			+ "Mélangez-les cartes restantes dans leur pioche","decks/deck-halicarnasse.png", "cards/card-back/card-back-halicarnasse.png",CardDecks.deckCardQuantities_Halicarnasse),
 
-	Ephese("Ephese", "Ephèse", //
+	Ephese(1, "Ephese", "Ephèse", //
 			"Prenez la première carte de la pioche centrale et posez-la devant vous","decks/deck-ephese.png", "cards/card-back/card-back-ephese.png",CardDecks.deckCardQuantities_Ephese),
 	
-	Olympie("Olympie", "Olympie", //
+	Olympie(1, "Olympie", "Olympie", //
 			"Prenez la première carte de la pioche à votre gauche et de celle à votre droite, et posez-les devant vous","decks/deck-olympie.png", "cards/card-back/card-back-olympie.png",CardDecks.deckCardQuantities_Olympie),
 	
-	Babylone("Babylone", "Babylone", //
+	Babylone(1, "Babylone", "Babylone", //
 			"Choisissez 1 jeton Progrès parmi les 4 disponibles, et posez-le devant vous","decks/deck-babylon.png", "cards/card-back/card-back-babylon.png",CardDecks.deckCardQuantities_Babylon),
 	
-	Rhodes("Rhodes", "Rhodes", //
+	Rhodes(4, "Rhodes", "Rhodes", //
 			"Ajoutez 1 Bouclier à votre total de Boucliers","decks/deck-rhodes.png", "cards/card-back/card-back-rhodes.png",CardDecks.deckCardQuantities_Rhodes),
 
-	Gizeh("Gizeh", "Gizeh", //
+	Gizeh(4, "Gizeh", "Gizeh", //
 			"Cette merveille n'a pas d'effet particulier, mais rapporte plus de points de victoire que les autres Merveilles","decks/deck-cizeh.png", "cards/card-back/card-back-gizeh.png",CardDecks.deckCardQuantities_Gizeh);
 	
 	// ------------------------------------------------------------------------
-	
+
+	public final int nbrEtage;
 	public final String displayName;
 	
 	public final String frenchName;
@@ -48,7 +53,8 @@ public enum Wonder {
 	
 	// ------------------------------------------------------------------------
 	
-	Wonder(String displayName, String frenchName, String effectDescription, String imagePathFront, String imagePathBack, ArrayList<CardDecks.CardTypeQuantity> lstcardDecks) {
+	Wonder(int nbrEtage, String displayName, String frenchName, String effectDescription, String imagePathFront, String imagePathBack, ArrayList<CardDecks.CardTypeQuantity> lstcardDecks) {
+		this.nbrEtage = nbrEtage;
 		this.displayName = displayName;
 		this.frenchName = frenchName;
 		this.effectDescription = effectDescription;

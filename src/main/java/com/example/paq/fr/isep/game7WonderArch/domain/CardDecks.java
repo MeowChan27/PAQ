@@ -22,7 +22,9 @@ public class CardDecks {
 			return somme;
 		}
 		public static void drawCard(ArrayList<CardTypeQuantity> cardTypeQuantities, CardTypeQuantity cardDefausse){
+			System.out.println(cardDefausse);
 			int index = cardTypeQuantities.indexOf(cardDefausse);
+			System.out.println(index);
 			cardTypeQuantities.get(index).quantity -= 1;
 			if (cardTypeQuantities.get(index).quantity == 0){
 				cardTypeQuantities.remove(cardDefausse);
@@ -42,9 +44,6 @@ public class CardDecks {
 			}
 			return null;
 		}
-
-
-
 	}
 	
 	/** Card Types x Quantities for Gizeh Deck */

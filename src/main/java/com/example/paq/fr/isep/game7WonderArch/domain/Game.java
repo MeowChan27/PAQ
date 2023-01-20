@@ -92,4 +92,18 @@ public class Game {
         return cardPiocher;
     }
 
+    public static CardDecks.CardTypeQuantity playCardDrawCentrale(Joueur joueurQuiPioche,ArrayList <CardDecks.CardTypeQuantity> lstPiocheCentrale, CardDecks.CardTypeQuantity cardPiocher){
+        CardDecks.CardTypeQuantity.drawCard(lstPiocheCentrale,cardPiocher);
+        CardType card = cardPiocher.cardType;
+        ArrayList <CardType> playerCards = joueurQuiPioche.getLstPlayerCard();
+        playerCards.add(card);
+        joueurQuiPioche.setLstPlayerCard(playerCards);
+        return cardPiocher;
+    }
+
+    public static boolean checkWonderUpgrade(Joueur joueur){
+        Wonder wonder = joueur.getWonder();
+        int pieceWonderBuild = joueur.getPieceWonderBuild();
+        return false;
+    }
 }

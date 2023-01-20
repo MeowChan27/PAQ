@@ -3,14 +3,9 @@ package com.example.paq;
 import com.example.paq.fr.isep.game7WonderArch.domain.CardDecks;
 import com.example.paq.fr.isep.game7WonderArch.domain.Game;
 import com.example.paq.fr.isep.game7WonderArch.domain.Joueur;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
@@ -18,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.*;
@@ -40,6 +34,10 @@ public class  BoardController implements Initializable {
 
     private ArrayList<CardDecks.CardTypeQuantity> lstNextCard = new ArrayList<>();
 
+    private ArrayList<CardDecks.CardTypeQuantity> lstPiocheCentrale = CardDecks.deckCardQuantities_Extra;
+
+    private ImageView imageViewPiocheCentrale = new ImageView();
+
     public static Image chargeImage(String url) throws Exception{
         return new Image(Objects.requireNonNull(HelloApplication.class.getResource(url)).openStream());
     }
@@ -49,9 +47,13 @@ public class  BoardController implements Initializable {
 
         // Circle
         Circle circle = new Circle((pane.getPrefWidth() / 2), (pane.getPrefHeight() / 2), 350);
-        circle.setFill(DODGERBLUE);
-        circle.setOpacity(0.6);
-        pane.getChildren().add(circle);
+        ImageView imageViewCircle = new ImageView();
+        try {
+            imageViewCircle.setImage(chargeImage("boards/board.jpg"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        pane.getChildren().add(imageViewCircle);
 
         // définir le nombre d'images et leur distance
 
@@ -119,6 +121,7 @@ public class  BoardController implements Initializable {
                 labelPlayerName.setLayoutY((k*pane.getPrefHeight()+20)/numImages);
                 labelPlayerName.setText("Nom du joueur : " + lstJoueur.get(k).getName());
 
+
         }
         // Start
         imageViews.get(0).setScaleX(2);
@@ -147,9 +150,28 @@ public class  BoardController implements Initializable {
         lstImageViewPioche.get(numImages-1).setOnMouseEntered(event -> scaleUp(event,lstImageViewPioche.get(numImages-1)));
         lstImageViewPioche.get(numImages-1).setOnMouseExited(event -> scaleDown(event,lstImageViewPioche.get(numImages-1)));
 
+        // pioche centrale
+        try {
+            imageViewPiocheCentrale.setImage(chargeImage("cards/card-back/card-back-question.png"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        imageViewPiocheCentrale.setFitWidth(50);
+        imageViewPiocheCentrale.setFitHeight(73);
+        imageViewPiocheCentrale.setX(circle.getCenterX()-50/2);
+        imageViewPiocheCentrale.setY(circle.getCenterY()-73/2);
+        pane.getChildren().add(imageViewPiocheCentrale);
+        imageViewPiocheCentrale.setOnMouseClicked(event -> piocheCentrale(event));
     }
 
     private int tourDuJoueur = 1;
+
+    public void piocheCentrale(MouseEvent event){
+        CardDecks.CardTypeQuantity cardPiocher = CardDecks.CardTypeQuantity.nextCard(lstPiocheCentrale);
+        Game.playCardDrawCentrale(lstJoueur.get(tourDuJoueur-1), lstPiocheCentrale,cardPiocher);
+        piocher(event,cardPiocher);
+    }
 
     public void piocherG(MouseEvent mouseEvent) throws Exception {
         // joueur pioche = joueur deck
@@ -272,6 +294,8 @@ public class  BoardController implements Initializable {
         if (tourDuJoueur == numImages+1){
             tourDuJoueur = 1;
         }
+
+        // Check construction wonder
     }
 
     public void scaleUp(MouseEvent mouseEvent, ImageView imageView){
